@@ -1,0 +1,17 @@
+{
+    "version": "0.0.1",
+    "name": "node-red-contrib-mineduino",
+    "node-red": {
+        "nodes": {
+            "raw": "src/raw.js",
+            "rawOnOff": "src/rawOnOff.js",
+            "simple": "src/simple.js",
+            "getraw": "src/getraw.js",
+            "sign": "src/sign.js",
+            "smart": "src/smart.js",
+            "entityMoveTo": "src/entityMoveTo.js",
+            "entityMoveToXYZ": "src/entityMoveToXYZ.js",
+            "entityGetInformations": "src/entityGetInformations.js"
+        }
+    }
+}

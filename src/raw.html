@@ -1,0 +1,50 @@
+<script type="text/javascript">
+    RED.nodes.registerType('turn raw',{
+        category: 'mineduino',
+        color: '#d43c2c',
+        defaults: {
+            name: {value:""},
+            level: {value: 15, validate: function(v) {
+                if(v == undefined || v === "") {
+                    return true;
+                }
+                let parsed = parseInt(v)
+                return parsed >= 0 && parsed <=15
+            }},
+            fromPayload: {value: false}
+        },
+        inputs:1,
+        outputs:1,
+        paletteLabel: "Turn raw level (/raw /hidden)",
+        icon: "mineduino_redstone_icon.png",
+        label: function() {
+            if(this.name) {
+                return this.name
+            } else {
+                if(this.fromPayload) {
+                    return "turn raw | from payload" 
+                } else {
+                    return "turn raw | level: " + this.level
+                }
+            }
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="turn raw">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+        <br>
+        <label for="node-input-level"><i class="icon-tag"></i> Level (0-15)</label>
+        <input type="number" id="node-input-level" placeholder="Level">
+        <br>
+        <label for="node-input-fromPayload"><i class="icon-tag"></i> Level from payload (msg.payload should be between 0-15)</label>
+        <input type="checkbox" id="node-input-fromPayload">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="turn raw">
+    <p>Node that prepare proper raw message to Mineduino server</p>
+    <p>You can put level in msg.payload, in order to do that set this in node settings (double click)</p>
+</script>

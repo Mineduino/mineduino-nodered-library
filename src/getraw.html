@@ -1,0 +1,53 @@
+<script type="text/javascript">
+    RED.nodes.registerType('getraw',{
+        category: 'mineduino',
+        color: '#d43c2c',
+        defaults: {
+            name: {value:""},
+            percent: {value: false},
+            maxPercent: {value: 15, validate: function(v) {
+                    if(v == undefined || v === "") {
+                        return true;
+                    }
+                    let parsed = parseInt(v)
+                    return parsed > 0
+                },
+            }
+
+        },
+        inputs:1,
+        outputs:1,
+        paletteLabel: "Decode raw (/raw)",
+        icon: "mineduino_redstone_icon.png",
+        label: function() {
+            if(this.name) {
+                return this.name
+            } else {
+                if(this.percent) {
+                    return "decode | as percent from " + this.maxPercent 
+                } else {
+                    return "decode | as number"
+                }
+            }
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="getraw">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+        <br>
+        <label for="node-input-percent"><i class="icon-tag"></i> Decode as percent (0-100)</label>
+        <input type="checkbox" id="node-input-percent">
+        <br>
+        <label for="node-input-maxPercent"><i class="icon-tag"></i> Max value (usually 15)</label>
+        <input type="number" id="node-input-maxPercent" placeholder="maxPercent">
+        <br>
+    </div>
+</script>
+
+<script type="text/html" data-help-name="getraw">
+    <p>Node that prepare proper raw message to Mineduino server</p>
+    <p>You can put level in msg.payload, in order to do that set this in node settings (double click)</p>
+</script>

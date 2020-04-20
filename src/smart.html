@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    RED.nodes.registerType('smart',{
+        category: 'mineduino',
+        color: '#009999',
+        defaults: {
+            name: {value:""},
+            onlyIfChanged: {value: true},
+            ommitFirst: {value: true}
+        },
+        inputs:1,
+        outputs:1,
+        paletteLabel: "Decode smart (/smart)",
+        icon: "mineduino_enderchest_icon.png",
+        label: function() {
+            if(this.name) {
+                return this.name
+            } else {
+                return "smart | " + (this.onlyIfChanged ? "change only" : "always")
+            }
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="smart">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+        <br>
+        <label for="node-input-onlyIfChanged"><i class="icon-tag"></i> Send signal only if was changed</label>
+        <input type="checkbox" id="node-input-onlyIfChanged">
+        <br>
+        <label for="node-input-ommitFirst"><i class="icon-tag"></i> Ommit first (after redeploy)</label>
+        <input type="checkbox" id="node-input-ommitFirst">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="smart">
+    <p>Node that prepare proper raw message to Mineduino server</p>
+    <p>You can put level in msg.payload, in order to do that set this in node settings (double click)</p>
+</script>

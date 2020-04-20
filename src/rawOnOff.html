@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('turnRawOnOff',{
+        category: 'mineduino',
+        color: '#d43c2c',
+        defaults: {
+            name: {value:""},
+            level: {value: true}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "mineduino_redstone_icon.png",
+        paletteLabel: "Turn raw ON/OFF (/raw /hidden)",
+        label: function() {
+            return this.name|| ("turn raw | " + (this.level ? "ON": "OFF"));
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="turnRawOnOff">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+        <label for="node-input-level"><i class="icon-tag"></i> Level (ON/OFF)</label>
+        <input type="checkbox" id="node-input-level" placeholder="Level">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="turnRawOnOff">
+    <p>Node that prepare proper raw message to Mineduino server</p>
+    <p>It also works for /hidden</p>
+</script>
