@@ -4,20 +4,24 @@
         color: '#fffb00',
         defaults: {
             name: {value:""},
-            actionType: {value: "getInfo"},
-            additionalConfig: {value: {}},
-            onlyIfChanged: {value: true},
-            ommitFirst: {value: true}
+            actionType: {value: "moveToPos"},
+            newX: {value: 0},
+            newY: {value: 0},
+            newZ: {value: 0},
+            speed: {value: 1},
+            distance: {value: 0.3},
+            pathFinder: {value: true},
+            fromPayload: {value: false}
         },
         inputs:1,
         outputs:1,
-        paletteLabel: "Entity move to relative (/entity)",
+        paletteLabel: "Entity move to XYZ (/entity)",
         icon: "mineduino_zombie_icon.png",
         label: function() {
             if(this.name) {
                 return this.name
             } else {
-                return "smart | " + (this.onlyIfChanged ? "change only" : "always")
+                return "move to XYZ | " + (this.fromPayload ? "from payload" : this.newX + "/" + this.newY + "/" + this.newZ)
             }
         }
     });
@@ -28,15 +32,42 @@
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
         <br>
-        <label for="node-input-onlyIfChanged"><i class="icon-tag"></i> Send signal only if was changed</label>
-        <input type="checkbox" id="node-input-onlyIfChanged">
+        <label for="node-input-fromPayload"><i class="icon-tag"></i> From payload (example in help)</label>
+        <input type="checkbox" step=0.01 id="node-input-fromPayload">
         <br>
-        <label for="node-input-ommitFirst"><i class="icon-tag"></i> Ommit first (after redeploy)</label>
-        <input type="checkbox" id="node-input-ommitFirst">
+        <label for="node-input-newX"><i class="icon-tag"></i> X</label>
+        <input type="number" step=0.01 id="node-input-newX">
+        <br>
+        <label for="node-input-newY"><i class="icon-tag"></i> Y</label>
+        <input type="number" step=0.01 id="node-input-newY">
+        <br>
+        <label for="node-input-newZ"><i class="icon-tag"></i> Z</label>
+        <input type="number" step=0.01 id="node-input-newZ">
+        <br>
+        <label for="node-input-speed"><i class="icon-tag"></i> Speed</label>
+        <input type="number" step=0.01 id="node-input-speed">
+        <br>
+        <label for="node-input-distance"><i class="icon-tag"></i> Max distance</label>
+        <input type="number" step=0.01 id="node-input-distance">
+        <br>
+        <label for="node-input-pathFinder"><i class="icon-tag"></i> Use pathfinder to reach location</label>
+        <input type="checkbox" id="node-input-pathFinder">
     </div>
 </script>
 
 <script type="text/html" data-help-name="entityMoveToXYZ">
-    <p>Node that prepare proper raw message to Mineduino server</p>
-    <p>You can put level in msg.payload, in order to do that set this in node settings (double click)</p>
+    <p>Node that prepare proper mineduino message to move entity to new location.</p>
+    <p>Example payload:</p>
+    <pre>
+    {
+        "x": 100.0, // New X location
+        "y": 100.0, // New Y location
+        "z": 100.0, // New Z location
+        "speed": 1.0, // Speed that entity will use to reach location
+        "pathFinder": false, // Use pathfinder (automated way to ommit obstacles)
+        "distance": 0.3 // Max distance that entity will accept from the target
+    }</pre>
+    <p>You can also specify fixed values inside node settings.</p>
+    <p>In order to send message - attach right side of node to MQTT output</p>
+
 </script>

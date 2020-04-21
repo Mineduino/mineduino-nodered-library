@@ -3,31 +3,33 @@ module.exports = function(RED) {
         RED.nodes.createNode(this,config);
         var node = this;
         node.on('input', function(msg) {
-            if(!config.onlyIfChanged) {
-                this.lastValueWas = msg.payload
+            if(config.fromPayload) {
+                let newPayload = {
+                    x: parseFloat(msg.payload.x),
+                    y: parseFloat(msg.payload.y),
+                    z: parseFloat(msg.payload.z),
+                    type: config.actionType,
+                    speed: parseFloat(msg.payload.speed),
+                    distance: parseFloat(msg.payload.distance),
+                    pathFinder: msg.payload.pathFinder ? true: false
+                }
+                msg.payload = JSON.stringify(newPayload)
                 node.send(msg)
+
             } else {
-                if(this.lastValueWas == undefined) {
-                    this.lastValueWas = msg.payload
-                    if(!config.ommitFirst) {
-                        node.send(msg)
-                    }                   
-                    
+                let newPayload = {
+                    x: parseFloat(config.newX),
+                    y: parseFloat(config.newY),
+                    z: parseFloat(config.newZ),
+                    type: config.actionType,
+                    speed: parseFloat(config.speed),
+                    distance: parseFloat(config.distance),
+                    pathFinder: config.pathFinder
                 }
-                else if(checkIfDifferent(msg.payload, this.lastValueWas)) {
-                    this.lastValueWas = msg.payload
-                    node.send(msg)
-                }
+                msg.payload = JSON.stringify(newPayload)
+                node.send(msg)
             }
         });
     }
-    function checkIfDifferent(arr1, arr2) {
-        if (arr1.length !== arr2.length) return true;
-        for (var i = 0; i < arr1.length; i++) {
-            if (arr1[i] !== arr2[i]) return true;
-        }
-    
-        return false;
-    }
-    RED.nodes.registerType("entityGetInformation", TurnOnLevel);
+    RED.nodes.registerType("entityMoveToXYZ", TurnOnLevel);
 }
