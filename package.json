@@ -1,6 +1,8 @@
 {
     "version": "1.0.0",
     "name": "node-red-contrib-mineduino",
+    "description": "Nodes for Mineduino project - connection between real electronic and Minecraft",
+    "keywords": ["mineduino", "minecraft"],
     "node-red": {
         "nodes": {
             "raw": "src/raw.js",
