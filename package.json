@@ -1,19 +1,42 @@
 {
-    "version": "1.0.0",
-    "name": "node-red-contrib-mineduino",
-    "description": "Nodes for Mineduino project - connection between real electronic and Minecraft",
-    "keywords": ["mineduino", "minecraft", "node-red"],
-    "node-red": {
-        "nodes": {
-            "raw": "src/raw.js",
-            "rawOnOff": "src/rawOnOff.js",
-            "simple": "src/simple.js",
-            "getraw": "src/getraw.js",
-            "sign": "src/sign.js",
-            "smart": "src/smart.js",
-            "entityMoveTo": "src/entityMoveTo.js",
-            "entityMoveToXYZ": "src/entityMoveToXYZ.js",
-            "entityGetInformations": "src/entityGetInformations.js"
-        }
+  "version": "1.0.1",
+  "name": "node-red-contrib-mineduino",
+  "description": "Nodes for Mineduino project - connection between real electronic and Minecraft",
+  "homepage": "https://github.com/Mineduino/mineduino-nodered-library",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "Adam Raźniewski",
+      "email": "adam@razniewski.eu",
+      "web": "https://razniewski.eu"
     }
+  ],
+  "author": {
+    "name": "Adam Raźniewski",
+    "email": "adam@razniewski.eu",
+    "url": "https://razniewski.eu"
+  },
+  "bugs": "https://github.com/Mineduino/mineduino-nodered-library/issues",
+  "keywords": [
+    "mineduino",
+    "minecraft",
+    "node-red"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mineduino/mineduino-nodered-library.git"
+  },
+  "node-red": {
+    "nodes": {
+      "raw": "src/raw.js",
+      "rawOnOff": "src/rawOnOff.js",
+      "simple": "src/simple.js",
+      "getraw": "src/getraw.js",
+      "sign": "src/sign.js",
+      "smart": "src/smart.js",
+      "entityMoveTo": "src/entityMoveTo.js",
+      "entityMoveToXYZ": "src/entityMoveToXYZ.js",
+      "entityGetInformations": "src/entityGetInformations.js"
+    }
+  }
 }
